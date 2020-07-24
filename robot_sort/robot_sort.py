@@ -96,39 +96,33 @@ class SortingRobot:
         """
         Sort the robot's list.
         """
-    def sort_helper(self):
-        # Fill this out
-        #light on means go right
-        #light off means go left
-        # if we can move right
-            #move right
-        #if held item is bigger than current list item, swap and move right
-        #else move right
-        #light is off once we reach the end of the list
-        #while light is off we move left
-        #if held item is larger than current list item
-            # move left
-        # else swap and move left
+
+    # Fill this out
+    #light on means go right
+    #light off means go left
+    # if we can move right
+        #move right
+    #if held item is bigger than current list item, swap and move right
+    #else move right
+    #light is off once we reach the end of the list
+    #while light is off we move left
+    #if held item is larger than current list item
+        # move left
+    # else swap and move left
         self.set_light_on()
-        self.swap_item()
         while self.light_is_on():
+            self.swap_item()
             while self.can_move_right():
                 self.move_right()
                 if self.compare_item() == 1:
-                    self.move_right()
-                elif self.compare_item() <= 0 or self.compare_item() == None:
                     self.swap_item()
-                else:
-                    self.move_right()
-                    self.set_light_off()
-        while self.light_is_on() != True:
-            while self.can_move_left():
+            while self.can_move_left() and self.compare_item() is not None:
                 self.move_left()
-                if self.compare_item() >= 0 or self.compare_item() == None:
-                    self.move_left()
-                elif self.compare_item() == -1:
-                    self.swap_item()
-
+            self.swap_item()
+            if self.can_move_right():
+                self.move_right()
+            else:
+                self.set_light_off()
 
 
 if __name__ == "__main__":
